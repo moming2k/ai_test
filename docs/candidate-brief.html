@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Candidate Task Brief</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --fg: #1a1a1a;
+    --muted: #5a6270;
+    --border: #e2e5ea;
+    --accent: #2f6fed;
+    --accent-bg: #eef3ff;
+    --code-bg: #f5f6f8;
+    --warn-bg: #fff8e6;
+    --warn-border: #f0d98c;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #14161a;
+      --fg: #e8e9ec;
+      --muted: #9aa1ad;
+      --border: #2a2d33;
+      --accent: #6d9bff;
+      --accent-bg: #1c2740;
+      --code-bg: #1d1f24;
+      --warn-bg: #2a2413;
+      --warn-border: #55491c;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    line-height: 1.55;
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 5rem;
+  }
+  h1 { font-size: 1.6rem; margin-bottom: 0.2rem; }
+  .subtitle { color: var(--muted); margin-top: 0; margin-bottom: 2rem; }
+  h2 { font-size: 1.15rem; margin-top: 2.5rem; border-bottom: 1px solid var(--border); padding-bottom: 0.4rem; }
+  .meta {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    background: var(--accent-bg);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    margin: 1.5rem 0;
+  }
+  .meta div { font-size: 0.92rem; }
+  .meta strong { display: block; color: var(--muted); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.03em; margin-bottom: 0.15rem; }
+  code, pre {
+    background: var(--code-bg);
+    border-radius: 6px;
+    font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    font-size: 0.88rem;
+  }
+  code { padding: 0.15em 0.4em; }
+  pre { padding: 1rem; overflow-x: auto; border: 1px solid var(--border); white-space: pre-wrap; }
+  ul, ol { padding-left: 1.3rem; }
+  li { margin-bottom: 0.4rem; }
+  .callout {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-border);
+    border-radius: 8px;
+    padding: 0.9rem 1.1rem;
+    margin: 1.2rem 0;
+    font-size: 0.93rem;
+  }
+  .task-card {
+    border: 1.5px solid var(--accent);
+    border-radius: 10px;
+    padding: 1.25rem 1.4rem;
+    margin: 1rem 0;
+  }
+  .task-card h3 { margin-top: 0; }
+  .checklist li { list-style: none; margin-left: -1.3rem; }
+  .checklist li::before { content: "☐ "; color: var(--muted); }
+  footer { margin-top: 3rem; color: var(--muted); font-size: 0.85rem; }
+</style>
+</head>
+<body>
+
+<h1>Full-Stack AI-Assisted Coding Task</h1>
+<p class="subtitle">React + FastAPI · use Claude / Copilot as you normally would</p>
+
+<div class="meta">
+  <div><strong>Time budget</strong>15–20 min build + 10–15 min discussion</div>
+  <div><strong>Stack</strong>FastAPI (backend/) · React + Vite (frontend/)</div>
+  <div><strong>Tools</strong>Claude, Copilot, or any AI assistant you normally use</div>
+</div>
+
+<div class="callout">
+  <strong>Use your AI tools freely.</strong> We're not evaluating whether you can type code
+  without help — we're evaluating how you work with an assistant: what you accept, what you
+  question, and whether you understand what ends up in your solution. Talk out loud as you go.
+</div>
+
+<h2>Setup</h2>
+<pre>cd backend
+python3.12 -m venv .venv
+.venv/bin/pip install -r requirements.txt
+.venv/bin/uvicorn app.main:app --reload --port 8000
+
+# separate terminal
+cd frontend
+npm install
+npm run dev</pre>
+<p>Confirm the app loads at <code>http://localhost:5173</code> and shows a table of orders
+before you start the task.</p>
+
+<h2>The task</h2>
+<div class="task-card">
+  <h3>Add a live search/filter to the Orders list</h3>
+  <p>Add a text input above the orders table that filters orders by item name
+  <strong>as the user types</strong> (no submit button), querying the backend rather than
+  filtering client-side. Specifically:</p>
+  <ul>
+    <li>Add a query parameter to the <code>GET /orders</code> endpoint (e.g. <code>?q=</code>)
+      that filters orders whose <code>item</code> contains the search text (case-insensitive).</li>
+    <li>Wire the React input to call this endpoint as the user types, and update the table
+      with the results.</li>
+    <li>Handle the loading and error states sensibly while typing.</li>
+  </ul>
+  <p>You're free to prompt your AI assistant however you like — write your own prompt,
+  ask it to plan first, iterate, whatever your normal workflow is.</p>
+</div>
+
+<h2>What "done" looks like</h2>
+<ul class="checklist">
+  <li>Typing in the search box narrows the visible orders without a page reload</li>
+  <li>Clearing the box restores the full list</li>
+  <li>The app doesn't error out or show stale/wrong results in normal use</li>
+</ul>
+
+<h2>After you finish (or time runs out)</h2>
+<p>We'll spend the remaining time walking through your implementation together — including
+anything the AI generated that you kept, changed, or discarded. Be ready to explain how it
+behaves under conditions you may not have explicitly tested (e.g. typing quickly, slow
+network, empty input).</p>
+
+<footer>ai-test/docs/candidate-brief.html — give this file to the candidate; keep
+interviewer-guide.html for yourself.</footer>
+
+</body>
+</html>
