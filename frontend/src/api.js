@@ -1,4 +1,4 @@
-const BASE_URL = "http://localhost:8000";
+const BASE_URL = "http://localhost:8010";
 
 export async function fetchOrders() {
   const res = await fetch(`${BASE_URL}/orders`);

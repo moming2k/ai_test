@@ -7,7 +7,7 @@ app = FastAPI(title="AI Test API")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173"],
+    allow_origins=["http://localhost:5180"],
     allow_methods=["*"],
     allow_headers=["*"],
 )

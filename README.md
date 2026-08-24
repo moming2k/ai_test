@@ -14,17 +14,17 @@ cd backend
 python3.12 -m venv .venv   # use 3.11/3.12/3.13 — pydantic-core has no 3.14 wheel yet
 .venv/bin/pip install -r requirements.txt
 .venv/bin/python -m pytest tests/ -q   # sanity check: 5 passed
-.venv/bin/uvicorn app.main:app --reload --port 8000
+.venv/bin/uvicorn app.main:app --reload --port 8010
 ```
 
-API docs at http://localhost:8000/docs once running.
+API docs at http://localhost:8010/docs once running.
 
 ### Frontend (React + Vite)
 
 ```bash
 cd frontend
 npm install
-npm run dev   # http://localhost:5173
+npm run dev   # http://localhost:5180
 ```
 
 ## Structure
